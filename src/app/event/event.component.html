@@ -1,0 +1,7 @@
+<div>
+  This is a great event!!!!!
+  <h1>Employee name {{parentData.name}}</h1>
+  <h1>Employee id {{parentData.empId}}</h1>
+  <button (click) = "handleClick()">ClickMe</button>
+  <app-employee *ngFor = "let employee of employees" [employee] = "employee"></app-employee>
+</div>

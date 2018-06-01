@@ -1,0 +1,6 @@
+span {
+    padding-right: 5px;
+}
+span.yellow {
+    color : rgb(47, 85, 255);
+}

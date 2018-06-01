@@ -1,0 +1,11 @@
+<li>  
+  <span>Id is {{employee.id}}</span>
+  <span>Name is {{employee.name}}</span> 
+  <div *ngIf="employee.name === 'logan'; then thenBlock else elseBlock"></div>
+  <ng-template #thenBlock >
+      <span [ngClass] = "getLoganClass()">Superhero with nails</span>
+  </ng-template>   
+  <ng-template #elseBlock>
+    <span>Superhero with a power to make you smile</span>
+  </ng-template>
+</li>
