@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-@Component({
-  selector: 'app-routable1',
+@Component({  
   templateUrl: './routable1.component.html',
   styleUrls: ['./routable1.component.css']
 })
