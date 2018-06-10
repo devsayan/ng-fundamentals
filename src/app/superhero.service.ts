@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,9 @@ export class SuperheroService {
     id : "16307",
     name : "deadpool"
   }];
-  constructor() { }
+  
   getEmployees(){
     return this.employees;
-  }
+  }  
+ 
 }
