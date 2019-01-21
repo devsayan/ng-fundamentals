@@ -10,5 +10,6 @@
   <app-event #child (childData) = "handleChildButtonClicked($event)" [parentData] = "parentData"></app-event>
   <button (click) = "child.publicMethod()">ParentButton</button>
   <h1>From Parent, the child value is {{child.publicprop}}</h1>
+  <app-feature-component></app-feature-component>
 </div>
 <router-outlet></router-outlet>

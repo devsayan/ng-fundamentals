@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
+import {MyFeatureModuleModule} from './my-feature-module/my-feature-module.module'
 
 
 import { AppComponent } from './app.component';
@@ -23,7 +24,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    MyFeatureModuleModule
   ],
   providers: [SuperheroService],
   bootstrap: [AppComponent]

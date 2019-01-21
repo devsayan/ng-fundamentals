@@ -21,6 +21,7 @@ export class EventComponent implements OnInit {
   }
   publicMethod(){
     console.log("child method called from parent");
+    this.childData.emit({"name" : "sayan"});
   }
   publicprop :any = "val"
   @Input() parentData : any;
