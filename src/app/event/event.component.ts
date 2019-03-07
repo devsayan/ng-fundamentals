@@ -1,5 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import {SuperheroService} from '../superhero.service'
+import { Component, OnInit, Input, Output, EventEmitter, ElementRef } from '@angular/core';
+import { IEmployee } from '../shared/employee.model';
+import { SuperheroService } from '../superhero.service'
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-event',
@@ -8,22 +10,36 @@ import {SuperheroService} from '../superhero.service'
 })
 export class EventComponent implements OnInit {
 
-  employees : any[]
-  constructor(private superHeroService : SuperheroService) { }
+  employees: IEmployee[]
+  constructor(private superHeroService: SuperheroService, private el: ElementRef) { }
+
 
   ngOnInit() {
-    this.employees = this.superHeroService.getEmployees();
+    this.superHeroService.getEmployees().subscribe((data: IEmployee[]) => {
+      this.employees = data;
+      //console.log(resp);
+    });
+    this.superHeroService.getImage().subscribe((data: any) => {
+      //let blob = new Blob([data], { type: 'image/jpg' });
+      let imgSrc = URL.createObjectURL(data.body);
+      $(this.el.nativeElement).find("img").attr("src", imgSrc);
+      console.log("success");
+    },(error:any) => {
+      console.log(error);
+    }, () => {
+      console.log("completed");
+    });
   }
- 
-  handleClick(){
+
+  handleClick() {
+
     console.log("button clicked");
     this.childData.emit("foo");
   }
-  publicMethod(){
+  publicMethod() {
     console.log("child method called from parent");
-    this.childData.emit({"name" : "sayan"});
   }
-  publicprop :any = "val"
-  @Input() parentData : any;
-  @Output() childData =  new EventEmitter();  
+  publicprop: any = "val"
+  @Input() parentData: any;
+  @Output() childData = new EventEmitter();
 }
