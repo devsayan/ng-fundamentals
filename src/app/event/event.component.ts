@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ElementRef, Inject } from '@angular/core';
 import { IEmployee } from '../shared/employee.model';
 import { SuperheroService } from '../superhero.service'
-import * as $ from 'jquery';
+import {JQUERY_TOKEN} from '../j-query-wrapper.service'
 
 @Component({
   selector: 'app-event',
@@ -11,18 +11,19 @@ import * as $ from 'jquery';
 export class EventComponent implements OnInit {
 
   employees: IEmployee[]
-  constructor(private superHeroService: SuperheroService, private el: ElementRef) { }
+  constructor(private superHeroService: SuperheroService, private el: ElementRef,
+  @Inject(JQUERY_TOKEN) private jQuery: any ) { }
 
 
   ngOnInit() {
     this.superHeroService.getEmployees().subscribe((data: IEmployee[]) => {
       this.employees = data;
-      //console.log(resp);
+      this.jQuery(this.el.nativeElement).find('h1').addClass('jColor');
     });
     this.superHeroService.getImage().subscribe((data: any) => {
       //let blob = new Blob([data], { type: 'image/jpg' });
       let imgSrc = URL.createObjectURL(data.body);
-      $(this.el.nativeElement).find("img").attr("src", imgSrc);
+      this.jQuery(this.el.nativeElement).find("img").attr("src", imgSrc);
       console.log("success");
     },(error:any) => {
       console.log(error);
@@ -40,6 +41,6 @@ export class EventComponent implements OnInit {
     console.log("child method called from parent");
   }
   publicprop: any = "val"
-  @Input() parentData: any;
+  @Input() pData: any;
   @Output() childData = new EventEmitter();
 }
